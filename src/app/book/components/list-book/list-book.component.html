@@ -1,0 +1,42 @@
+<div class="row mt-4">
+    <div class="col-12">
+        <h1>Administración Libros</h1>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12 col-lg-2">
+        <a routerLink="/book/add" class="btn btn-outline-success">Agregar</a>
+    </div>
+
+    <div class="col-md-12 col-lg-2">
+        <a routerLink="/book/" class="btn btn-outline-secondary">Regresar</a>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <table class="table table-bordered table-striped" >
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Nombre Autor</th>
+                <th>Nombre Categoría</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let book of books">
+                <td>{{ book.nombre }}</td>
+                <td>{{ book.precio }}</td>
+                <td>{{ book.author?.nombre }}</td>
+                <td>{{ book.category?.nombre }}</td>
+                <td class="text-center">
+                    <a class="btn btn-primary" routerLink="/book/edit/{{ book.id }}">Actualizar</a>
+                    <button class="btn btn-secondary mx-4" (click)="changeState(book.id)">Cambiar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

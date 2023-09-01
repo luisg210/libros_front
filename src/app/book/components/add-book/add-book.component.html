@@ -1,0 +1,59 @@
+<div class="row mt-4">
+    <div class="col-12">
+        <h1>{{ id ? 'Editar libro' : 'Nuevo Libro' }}</h1>
+    </div>
+</div>
+
+
+<form (ngSubmit)="submit()" [formGroup]="form">
+    <div class="row mt-4">
+        <div class="col-md-12 col-lg-6 form-group">
+            <label for="name">Nombre</label>
+            <input type="text" class="form-control" formControlName="nombre">
+            <div *ngIf="f['nombre'].touched && f['nombre'].invalid" class="alert alert-danger mt-1">
+                <div *ngIf="f['nombre'].errors && f['nombre'].errors['required']">Nombre es obligatorio</div>
+            </div>
+        </div> 
+
+        <div class="col-md-12 col-lg-6 form-group">
+            <label for="precio">Precio</label>
+            <input type="number" min="0.1" class="form-control" formControlName="precio">
+            <div *ngIf="f['precio'].touched && f['precio'].invalid" class="alert alert-danger mt-1">
+                <div *ngIf="f['precio'].errors">Solo números o números positivos</div>
+            </div>
+        </div> 
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12 col-lg-6 form-group">
+            <label>Categoria</label>
+            <select class="form-select" formControlName="categoria">
+                <option *ngFor="let c of categories" [value]="c.id">{{ c.nombre }}</option>
+            </select>
+            <div *ngIf="f['categoria'].touched && f['categoria'].invalid" class="alert alert-danger mt-1">
+                <div *ngIf="f['categoria'].errors">Seleccione una categoria</div>
+            </div>
+        </div> 
+
+        <div class="col-md-12 col-lg-6 form-group">
+            <label>Autor</label>
+            <select class="form-select" formControlName="autor">
+                <option *ngFor="let a of authors" [value]="a.id">{{ a.nombre }}</option>
+            </select>
+            <div *ngIf="f['autor'].touched && f['autor'].invalid" class="alert alert-danger mt-1">
+                <div *ngIf="f['autor'].errors">Seleccione un autor</div>
+            </div>
+        </div> 
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12 col-lg-4 mt-2">
+            <button class="btn btn-success" type="submit" [disabled]="!form.valid">{{ id ? 'Editar' : 'Guardar' }}</button>
+        </div>
+         
+        <div class="col-md-12 col-lg-4 mt-2">
+            <a class="btn btn-danger" routerLink="/book/books">Cancelar</a>
+        </div>
+    </div>
+</form>
+
